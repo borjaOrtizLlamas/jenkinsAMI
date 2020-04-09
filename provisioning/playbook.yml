@@ -1,0 +1,41 @@
+---
+#play book para la instalacion de wordpress 
+#configuracion del mismo, también la configuracion
+#de nginx
+- hosts: all
+#varibles a usar
+  vars:
+    local_root: files/
+#tareas para usar en esta provision
+  tasks:
+# instalamos java para ejecutar jenkins
+  - name: intall JAVA
+    apt: 
+      name: "{{packages}}" 
+      state: present
+    vars:
+      packages:
+      - default-jdk
+      - maven
+    become: true
+#Copiamos la ejecución de jenkins
+  - name: Jenkins jar
+    copy:
+      src: "{{local_root}}jen.service"
+      dest: /etc/systemd/system/
+    become: true
+#iniciamos el servicio de MySQL
+  - name: archivo de ejecucion de servicio 
+    copy:
+      src: "{{local_root}}jenkinsService"
+      dest: /home/ubuntu/
+      mode: 0777
+    become: true
+  - name: download jenkins
+    get_url:
+      url: http://mirrors.jenkins.io/war/latest/jenkins.war
+      dest: /home/ubuntu/jenkins.war
+      mode: 0777
+  - name: Execute enable  service
+    become: yes
+    shell: systemctl enable jen
