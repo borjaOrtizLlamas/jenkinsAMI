@@ -9,7 +9,7 @@
 #tareas para usar en esta provision
   tasks:
 # instalamos java para ejecutar jenkins
-  - name: intall JAVA
+  - name: intall JDK-MAVEN-UNZIP
     apt: 
       name: "{{packages}}" 
       state: present
@@ -17,7 +17,15 @@
       packages:
       - default-jdk
       - maven
+      - unzip
     become: true
+  - name: Download terraform.zip
+    get_url:
+      url: https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
+      dest: /home/ubuntu/
+  - name: Execute the command in remote
+    shell: unzip /home/ubuntu/terraform_0.12.24_linux_amd64.zip && mv /home/ubuntu/terraform /usr/local/bin/
+    become: yes
 #Copiamos la ejecución de jenkins
   - name: Jenkins jar
     copy:

@@ -10,8 +10,10 @@
 			"secret_key": "{{user `aws_secret`}}",
 			"region": "eu-west-1",
 			"instance_type": "t2.micro",
-			"ami_name": "UnirUbuntuWithJenkins",
-
+			"ami_name": "UnirUbuntuWithJenkins-{{timestamp}}",
+			"subnet_id" :"subnet-0f3be1332763eb116",
+			"vpc_id":"vpc-020d98022334ba2ee",
+			
 			"source_ami_filter": {
 				"filters": {
 					"virtualization-type": "hvm",
