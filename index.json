@@ -16,7 +16,6 @@
 			"ami_name": "UnirUbuntuWithJenkins-{{timestamp}}",
 			"subnet_id" :"{{user `sub_network_id`}}",
 			"vpc_id":"{{user `vpc_id`}}",
-			
 			"source_ami_filter": {
 				"filters": {
 					"virtualization-type": "hvm",
