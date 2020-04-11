@@ -1,7 +1,10 @@
 {
   "variables": {
     "aws_access": "{{env `unir_images_generator_id`}}",
-    "aws_secret": "{{env `unir_images_generator_key`}}"
+		"aws_secret": "{{env `unir_images_generator_key`}}",
+		"vpc_id": "{{env `unir_vpc_id`}}",
+    "sub_network_id": "{{env `unir_sub_network_id`}}"
+
   },
 	"builders": [
 		{
@@ -11,8 +14,8 @@
 			"region": "eu-west-1",
 			"instance_type": "t2.micro",
 			"ami_name": "UnirUbuntuWithJenkins-{{timestamp}}",
-			"subnet_id" :"subnet-0f3be1332763eb116",
-			"vpc_id":"vpc-020d98022334ba2ee",
+			"subnet_id" :"{{user `sub_network_id`}}",
+			"vpc_id":"{{user `vpc_id`}}",
 			
 			"source_ami_filter": {
 				"filters": {

@@ -17,6 +17,7 @@
       packages:
       - default-jdk
       - maven
+      - docker
       - unzip
     become: true
   - name: Download terraform.zip
