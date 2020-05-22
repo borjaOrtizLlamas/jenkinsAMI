@@ -27,6 +27,22 @@
   - name: Execute the command in remote
     shell: unzip /home/ubuntu/terraform_0.12.24_linux_amd64.zip && mv /home/ubuntu/terraform /usr/local/bin/
     become: yes
+#jenkins setings - no esta en github porque pesa 500mb - a adjuntar
+  - name: setting config jenkins
+    copy:
+      src: "{{local_root}}jenkins.zip"
+      dest: /home/ubuntu/jenkins.zip
+      mode: 0777
+    become: yes
+  - name: unzip  jenkins config
+    shell: unzip /home/ubuntu/jenkins.zip && chmod -R  777 /home/ubuntu/.jenkins
+    become: yes
+#tenemos que tener variables.tfvars, archivo con credenciales no subido. 
+  - name: credentials terraform
+    copy:
+      src: "{{local_root}}/variables.tfvars"
+      dest: "/home/ubuntu/variables.tfvars"
+      mode: 0777
 #Copiamos la ejecución de jenkins
   - name: Jenkins jar
     copy:
@@ -48,3 +64,8 @@
   - name: Execute enable  service
     become: yes
     shell: systemctl enable jen
+  - name: credentials AWS
+    copy:
+      src:  "{{local_root}}/.aws"
+      dest: /home/ubuntu/
+      mode: 0777

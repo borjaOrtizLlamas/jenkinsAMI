@@ -12,7 +12,7 @@
 			"access_key": "{{user `aws_access`}}",
 			"secret_key": "{{user `aws_secret`}}",
 			"region": "eu-west-1",
-			"instance_type": "t2.micro",
+			"instance_type": "t2.xlarge",
 			"ami_name": "UnirUbuntuWithJenkins-{{timestamp}}",
 			"subnet_id" :"{{user `sub_network_id`}}",
 			"vpc_id":"{{user `vpc_id`}}",
@@ -35,7 +35,10 @@
 		},{
 			"type": "ansible",
 			"playbook_file": "./provisioning/playbook.yml"
+	}, 
+	{
+		"type": "shell",
+		"script": "aws-cli2.sh"
 	}
-
 	]
 }
