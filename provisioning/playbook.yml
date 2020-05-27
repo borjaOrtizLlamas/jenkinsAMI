@@ -30,7 +30,7 @@
 #jenkins setings - no esta en github porque pesa 500mb - a adjuntar
   - name: setting config jenkins
     copy:
-      src: "{{local_root}}files/jenkins.zip"
+      src: "{{local_root}}jenkins.zip"
       dest: /home/ubuntu/jenkins.zip
       mode: 0777
     become: yes
@@ -63,7 +63,7 @@
       mode: 0777
   - name: setting config aws
     copy:
-      src: "{{local_root}}files/aws.zip"
+      src: "{{local_root}}aws.zip"
       dest: /home/ubuntu/aws.zip
       mode: 0777
     become: yes
