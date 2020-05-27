@@ -19,6 +19,7 @@
       - maven
       - docker.io
       - unzip
+      - packer
     become: true
   - name: Download terraform.zip
     get_url:
@@ -64,8 +65,12 @@
   - name: Execute enable  service
     become: yes
     shell: systemctl enable jen
-  - name: credentials AWS
+  - name: setting config jenkins
     copy:
-      src:  "{{local_root}}/.aws"
-      dest: /home/ubuntu/
+      src: "{{local_root}}aws.zip"
+      dest: /home/ubuntu/aws.zip
       mode: 0777
+    become: yes
+  - name: unzip  jenkins config
+    shell: unzip /home/ubuntu/aws.zip && chmod -R 777 /home/ubuntu/.aws
+    become: yes
