@@ -1,3 +1,4 @@
+provisioning/files/aws.zip
 provisioning/files/.aws/
 provisioning/files/jenkins.zip
 provisioning/files/variables.tfvars

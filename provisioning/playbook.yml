@@ -30,7 +30,7 @@
 #jenkins setings - no esta en github porque pesa 500mb - a adjuntar
   - name: setting config jenkins
     copy:
-      src: "{{local_root}}jenkins.zip"
+      src: "{{local_root}}files/jenkins.zip"
       dest: /home/ubuntu/jenkins.zip
       mode: 0777
     become: yes
@@ -61,11 +61,12 @@
       url: http://mirrors.jenkins.io/war/latest/jenkins.war
       dest: /home/ubuntu/jenkins.war
       mode: 0777
-  - name: Execute enable  service
-    become: yes
-    shell: systemctl enable jen
-  - name: credentials AWS
+  - name: setting config aws
     copy:
-      src:  "{{local_root}}/.aws"
-      dest: /home/ubuntu/
+      src: "{{local_root}}files/aws.zip"
+      dest: /home/ubuntu/aws.zip
       mode: 0777
+    become: yes
+  - name: unzip  aws config
+    shell: unzip /home/ubuntu/aws.zip && chmod -R  777 /home/ubuntu/.aws
+    become: yes
