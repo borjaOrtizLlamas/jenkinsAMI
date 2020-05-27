@@ -49,7 +49,7 @@
       src: "{{local_root}}jen.service"
       dest: /etc/systemd/system/
     become: true
-#iniciamos el servicio de MySQL
+#iniciamos el servicio de Jenkins
   - name: archivo de ejecucion de servicio 
     copy:
       src: "{{local_root}}jenkinsService"
@@ -61,12 +61,11 @@
       url: http://mirrors.jenkins.io/war/latest/jenkins.war
       dest: /home/ubuntu/jenkins.war
       mode: 0777
-  - name: setting config aws
+  - name: Execute enable  service
+    become: yes
+    shell: systemctl enable jen
+  - name: credentials AWS
     copy:
-      src: "{{local_root}}aws.zip"
-      dest: /home/ubuntu/aws.zip
+      src:  "{{local_root}}/.aws"
+      dest: /home/ubuntu/
       mode: 0777
-    become: yes
-  - name: unzip  aws config
-    shell: unzip /home/ubuntu/aws.zip && chmod -R  777 /home/ubuntu/.aws
-    become: yes
