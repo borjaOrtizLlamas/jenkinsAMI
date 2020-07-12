@@ -9,7 +9,7 @@
 #tareas para usar en esta provision
   tasks:
 # instalamos java para ejecutar jenkins
-  - name: intall JDK-MAVEN-UNZIP
+  - name: intall JDK-MAVEN-UNZIP-docker
     apt: 
       name: "{{packages}}" 
       state: present
@@ -20,6 +20,9 @@
       - docker.io
       - unzip
       - packer
+      - docker-compose
+      - gnupg2
+      - pass
     become: true
   - name: Download terraform.zip
     get_url:
